@@ -1,0 +1,59 @@
+=====================게시판 테이블=======================
+create table freeboard(
+    
+    bno NUMBER(10,0) not null,
+    title VARCHAR2(200) not null,
+    content VARCHAR2(2000) not null,
+    writer VARCHAR2(50) not null,
+    regdate date DEFAULT sysdate,
+    updatedate date DEFAULT sysdate
+
+);
+alter table freeboard add CONSTRAINT freeboard_bno_pk PRIMARY KEY (bno);
+create sequence freeboard_seq;
+
+=====================댓글 테이블=======================
+create table freereply(    
+    rno number(10,0),
+    bno number(10,0),
+    reply VARCHAR2(1000),
+    replyId VARCHAR2(50),
+    replyPw VARCHAR2(50),
+    replydate date DEFAULT sysdate,
+    updatedate date DEFAULT sysdate
+);
+alter table freereply add CONSTRAINT freereply_rno_pk PRIMARY KEY (rno);
+create SEQUENCE freereply_seq;
+
+=====================유저 테이블=======================
+create table users(
+    userId VARCHAR2(50),
+    userPw VARCHAR2(50),
+    userName VARCHAR2(50),
+    userPhone1 VARCHAR2(50),
+    userPhone2 VARCHAR2(50),
+    userEmail1 VARCHAR2(50),
+    userEmail2 VARCHAR2(50),
+    addrZipNum VARCHAR2(50),
+    addrBasic VARCHAR2(200),
+    addrDetail VARCHAR2(200),
+    regdate date default sysdate
+);
+
+alter table users add CONSTRAINT users_userId_pk PRIMARY KEY (userId);
+
+
+=====================sns게시판 테이블=======================
+create table snsboard(
+    bno number(10,0),
+    writer varchar2(50) not null,--글쓴이
+    uploadpath varchar2(100) not null,--업로드경로
+    fileloca varchar2(50) not null,--날짜파일
+    filename varchar2(50) not null,--변경해서 저장할 파일이름
+    filerealname varchar2(50) not null,--파일 변경하기 전 파일이름
+    content varchar2(2000),
+    regdate date DEFAULT sysdate
+);
+
+alter table snsboard add CONSTRAINT snsboard_bno_pk PRIMARY key (bno);
+create sequence snsboard_seq;
